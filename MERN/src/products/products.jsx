@@ -1,0 +1,39 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+
+const Products=()=>{
+const [products,setProduct]=useState([])
+
+useEffect(()=>{
+    axios.get(`${import.meta.env.VITE_API_URL}/api/products`)
+    .then(res=>setProduct(res.data))
+},[])
+
+
+return(<>
+
+<div>
+      {products.map(p => (
+        <div key={p._id}>
+          <img
+            src={`${import.meta.env.VITE_API_URL}/${p.thumbnail}`}
+            width="150"
+          />
+          <h3>
+            <Link to={`/products/${p.slug}`}>
+              {p.title}
+            </Link>
+          </h3>
+          <p>₹{p.finalPrice}</p>
+        </div>
+      ))}
+    </div>
+
+
+</>)
+
+
+}
+
+export default Products
