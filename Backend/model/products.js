@@ -22,6 +22,9 @@ const ProductSchema = new mongoose.Schema(
     finalPrice: Number,
 
     countInStock: { type: Number, required: true },
+       rating: { type: Number, default: 0 },
+
+    numReviews: { type: Number, default: 0 },
 
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,

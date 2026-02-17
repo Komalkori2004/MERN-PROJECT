@@ -44,15 +44,17 @@ const AddProduct = () => {
         <input name="title" placeholder="Title" onChange={handleChange} /><br/>
         <input name="brand" placeholder="Brand" onChange={handleChange} /><br/>
         <input name="category" placeholder="Category" onChange={handleChange} /><br/>
-        <input name="price" placeholder="Price" onChange={handleChange} /><br/>
+        <input name="price" placeholder="Price" type="number" onChange={handleChange} /><br/>
         <input
           name="discountPercentage"
           placeholder="Discount"
+          type="number"
           onChange={handleChange}
         /><br/>
         <input
           name="countInStock"
           placeholder="Stock"
+          type="number"
           onChange={handleChange}
         /><br/>
 

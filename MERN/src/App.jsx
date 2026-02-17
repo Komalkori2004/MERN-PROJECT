@@ -20,7 +20,8 @@ return(<>
 
 
   <Route path="/login"  element={<Login/>}></Route>
-  <Route path="/" element={<Signup/>} ></Route>
+<Route path="/" element={<Products/>} />
+<Route path="/signup" element={<Signup/>} />
   <Route
 path="/user"element={
   <Protected role="user">
@@ -43,9 +44,16 @@ path="/add-product"element={
   </Route>
 
 
-<Route path="/products" element={<Products/>}></Route>
+{/* <Route path="/products" element={<Products/>}></Route> */}
 <Route path="/products/:slug" element={<ProductDetails/>}></Route>
-<Route path="/cart" element={<Cart/>} />
+<Route
+  path="/cart"
+  element={
+    <Protected role="user">
+      <Cart/>
+    </Protected>
+  }
+/>
 
 </Routes>
 
