@@ -46,7 +46,7 @@ path="/admin"element={
           <Route
             path="/cart"
             element={
-              <Protected role="user">
+              <Protected>
                 <Cart />
               </Protected>
             }

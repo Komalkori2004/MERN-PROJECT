@@ -1,7 +1,10 @@
 import { useState } from "react";
+
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
+  const navigate=useNavigate()
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -34,6 +37,7 @@ const AddProduct = () => {
       },
     });
     alert("Product Added");
+    navigate('/')
   };
 
   return (
