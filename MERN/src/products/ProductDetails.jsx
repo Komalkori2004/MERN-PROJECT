@@ -1,11 +1,13 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 import axios from "axios";
 
 const ProductDetails = () => {
   const { slug } = useParams();
   const [product, setProducts] = useState(null);
-  const token = localStorage.getItem("token");
+const navigate=useNavigate()
+
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_API_URL}/api/products/${slug}`)
@@ -18,6 +20,12 @@ const ProductDetails = () => {
 
   // to add product in cart
   const addToCart = async () => {
+
+    const token=localStorage.getItem("token")
+    if(!token){
+      navigate("/login",{state:{from:`/products/${slug}`}})
+      return
+    }
     try {
       await axios.post(
         `${import.meta.env.VITE_API_URL}/api/cart/add`,
@@ -96,6 +104,7 @@ const ProductDetails = () => {
           <div style={{ marginTop: "20px" }}>
             <button
               onClick={addToCart}
+                disabled={product.countInStock === 0}
               style={{
                 padding: "10px 20px",
                 background: "#FFD814",
@@ -103,7 +112,7 @@ const ProductDetails = () => {
                 marginRight: "10px",
               }}
             >
-              Add to Cart
+              {product.countInStock === 0 ? "Out of Stock" : "Add to Cart"}
             </button>
 
             <button

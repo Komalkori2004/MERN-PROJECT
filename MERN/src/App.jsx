@@ -1,4 +1,4 @@
-import { BrowserRouter,Routes,Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./component/login";
 import Signup from "./component/signup";
 import UserDashboard from "./component/userD";
@@ -9,58 +9,51 @@ import Products from "./products/products";
 import AddProduct from "./products/addProduct";
 import Cart from "./products/cart";
 
+function App() {
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/" element={<Products />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/user"
+            element={
+              <Protected role="user">
+                <UserDashboard />
+              </Protected>
+            }
+          ></Route>
 
-function App(){
-
-
-return(<>
-<BrowserRouter>
-
-<Routes>
-
-
-  <Route path="/login"  element={<Login/>}></Route>
-<Route path="/" element={<Products/>} />
-<Route path="/signup" element={<Signup/>} />
-  <Route
-path="/user"element={
-  <Protected role="user">
-    <UserDashboard/>
-  </Protected>}>
-  </Route>
-
-    {/* <Route
+          {/* <Route
 path="/admin"element={
   <Protected role="admin">
     <AdminDashboard/>
   </Protected>}>
   </Route> */}
 
-      <Route
-path="/add-product"element={
-  <Protected role="admin">
-    <AddProduct/>
-  </Protected>}>
-  </Route>
+          <Route
+            path="/add-product"
+            element={
+              <Protected role="admin">
+                <AddProduct />
+              </Protected>
+            }
+          ></Route>
 
-
-{/* <Route path="/products" element={<Products/>}></Route> */}
-<Route path="/products/:slug" element={<ProductDetails/>}></Route>
-<Route
-  path="/cart"
-  element={
-    <Protected role="user">
-      <Cart/>
-    </Protected>
-  }
-/>
-
-</Routes>
-
-</BrowserRouter>
-
-</>)
-
-
+          <Route path="/products/:slug" element={<ProductDetails />}></Route>
+          <Route
+            path="/cart"
+            element={
+              <Protected role="user">
+                <Cart />
+              </Protected>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
-export default App
+export default App;

@@ -13,7 +13,7 @@ export default function AdminDashboard() {
         const token = localStorage.getItem("token");
 
         await axios.get(
-          "http://localhost:5000/api/auth/admin",
+          `${import.meta.env.VITE_API_URL}/api/auth/admin`,
           {
             headers: {
               Authorization: `Bearer ${token}`
