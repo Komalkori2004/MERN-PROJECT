@@ -27,7 +27,7 @@ router.post("/", protect, isAdmin, upload.single("thumbnail"), async (req, res) 
         price: req.body.price,
         discountPercentage: req.body.discountPercentage,
         countInStock: req.body.countInStock,
-       thumbnail: req.file ? req.file.path : "",
+        thumbnail: req.file ? req.file.path : "",
         createdBy: req.user.id
     })
     res.status(202).json(product)
@@ -36,19 +36,30 @@ router.post("/", protect, isAdmin, upload.single("thumbnail"), async (req, res) 
 
 // =======to Get products========
 
-router.get("/",async(req,res)=>{
-    const products= await Products.find()
-    res.json(products)
-})
+router.get("/", async (req, res) => {
+    const keyword = req.query.keyword;
 
-router.get("/:slug",async(req,res)=>{
-    const product=await Products.findOne({slug:req.params.slug})
+    console.log("Keyword from frontend:", keyword);
 
-    if(!product){
-        return res.status(404).json({message:"NOT FOUND"})
+    if (keyword) {
+        const products = await Products.find({
+            title: { $regex: keyword, $options: "i" }
+        });
+        return res.json(products);
+    }
+
+    const products = await Products.find();
+    res.json(products);
+});
+
+router.get("/:slug", async (req, res) => {
+    const product = await Products.findOne({ slug: req.params.slug })
+
+    if (!product) {
+        return res.status(404).json({ message: "NOT FOUND" })
     }
 
     res.json(product)
 })
 
-module.exports=router
+module.exports = router
