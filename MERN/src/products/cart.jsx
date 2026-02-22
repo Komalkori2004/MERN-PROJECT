@@ -27,12 +27,18 @@ const Cart = () => {
   const totalPrice = cart.items.reduce((acc, item) => {
     return acc + item.product.finalPrice * item.quantity;
   }, 0);
+
+  const shipping = totalPrice > 1000 ? 0 : 100;
+  const grandTotal = totalPrice + shipping;
   if (!cart) return <p>Cart is Empty</p>;
 
   //   to incress or decress quntity of product
 
   const updateQty = async (productId, quantity) => {
-    if (quantity < 1) return;
+if (quantity < 1) {
+  await Remove(productId);
+  return;
+}
     await axios.put(
       `${import.meta.env.VITE_API_URL}/api/cart/update`,
       { productId, quantity },
@@ -48,11 +54,14 @@ const Cart = () => {
   //   to remove items
 
   const Remove = async (productId) => {
-    await axios.delete(`${import.meta.env.VITE_API_URL}/api/cart/remove/${productId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    await axios.delete(
+      `${import.meta.env.VITE_API_URL}/api/cart/remove/${productId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    );
     FetchCart();
   };
 
@@ -89,6 +98,7 @@ const Cart = () => {
                 <div style={{ flex: 1 }}>
                   <h3>{item.product.title}</h3>
                   <p>Price: ₹{item.product.finalPrice}</p>
+                  <p>Subtotal: ₹{item.product.finalPrice * item.quantity}</p>
                   <button
                     onClick={() =>
                       updateQty(item.product._id, item.quantity + 1)
@@ -120,7 +130,10 @@ const Cart = () => {
                 textAlign: "right",
               }}
             >
-              <h2>Total: ₹{totalPrice}</h2>
+              <p>Subtotal: ₹{totalPrice}</p>
+              <p>Shipping: ₹{shipping}</p>
+              <hr />
+              <h2>Grand Total: ₹{grandTotal}</h2>
             </div>
           </>
         )}
