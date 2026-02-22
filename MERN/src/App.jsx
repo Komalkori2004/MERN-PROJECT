@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {  Routes, Route } from "react-router-dom";
 import Login from "./component/login";
 import Signup from "./component/signup";
 import UserDashboard from "./component/userD";
@@ -8,11 +8,15 @@ import ProductDetails from "./products/ProductDetails";
 import Products from "./products/products";
 import AddProduct from "./products/addProduct";
 import Cart from "./products/cart";
+import Nav from "./pages/nav";
+
 
 function App() {
   return (
     <>
-      <BrowserRouter>
+     <Nav></Nav>
+   
+     
         <Routes>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/" element={<Products />} />
@@ -52,7 +56,7 @@ path="/admin"element={
             }
           />
         </Routes>
-      </BrowserRouter>
+ 
     </>
   );
 }

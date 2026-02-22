@@ -1,0 +1,36 @@
+/* Navbar Container */
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background-color: #111;
+  color: white;
+}
+
+/* Logo */
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Links Container */
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+/* Individual Link */
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+/* Hover Effect */
+.nav-link:hover {
+  color: #ff4d4d;
+}

@@ -37,19 +37,21 @@ router.post("/", protect, isAdmin, upload.single("thumbnail"), async (req, res) 
 // =======to Get products========
 
 router.get("/", async (req, res) => {
-    const keyword = req.query.keyword;
+    try {
+        const keyword = req.query.keyword
+        const query = keyword ? {
+            $or: [
+                { title: { $regex: keyword, $options: "i" } },
+                { description: { $regex: keyword, $options: "i" } },
+                { brand: { $regex: keyword, $options: "i" } },
+            ],
+        } : {}
+        const product = await Product.find(query)
+        res.json(product)
 
-    console.log("Keyword from frontend:", keyword);
-
-    if (keyword) {
-        const products = await Products.find({
-            title: { $regex: keyword, $options: "i" }
-        });
-        return res.json(products);
+    } catch (error) {
+        res.status(500).json({ message: "Server Error" });
     }
-
-    const products = await Products.find();
-    res.json(products);
 });
 
 router.get("/:slug", async (req, res) => {
