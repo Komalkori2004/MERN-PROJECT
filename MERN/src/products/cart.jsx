@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "../style/cart.css"
 
 const Cart = () => {
   const token = localStorage.getItem("token");
@@ -67,78 +68,75 @@ if (quantity < 1) {
 
   return (
     <>
-      <div style={{ padding: "40px", maxWidth: "900px", margin: "auto" }}>
-        <h1>My Cart 🛒</h1>
+ <div className="cart-container">
+  <h1 className="cart-title">My Cart 🛒</h1>
 
-        {cart.items.length === 0 ? (
-          <p>Your cart is empty</p>
-        ) : (
-          <>
-            {cart.items.map((item) => (
-              <div
-                key={item._id}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  border: "1px solid #ddd",
-                  padding: "20px",
-                  marginBottom: "20px",
-                  borderRadius: "10px",
-                }}
+  {cart.items.length === 0 ? (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h2>Your Cart is Empty</h2>
+      <p>Add products to continue shopping</p>
+    </div>
+  ) : (
+    <>
+      {cart.items.map((item) => (
+        <div key={item._id} className="cart-item">
+          <img
+            src={`${import.meta.env.VITE_API_URL}/${item.product.thumbnail}`}
+            alt={item.product.title}
+          />
+
+          <div className="cart-details">
+            <h3>{item.product.title}</h3>
+            <p>Price: ₹{item.product.finalPrice}</p>
+            <p>
+              Subtotal: ₹
+              {item.product.finalPrice * item.quantity}
+            </p>
+
+            <div className="qty-box">
+              <button
+                onClick={() =>
+                  updateQty(item.product._id, item.quantity - 1)
+                }
               >
-                {/* IMAGE */}
-                <img
-                  src={`${import.meta.env.VITE_API_URL}/${item.product.thumbnail}`}
-                  alt={item.product.title}
-                  width="120"
-                  style={{ borderRadius: "10px", marginRight: "20px" }}
-                />
+                -
+              </button>
 
-                {/* DETAILS */}
-                <div style={{ flex: 1 }}>
-                  <h3>{item.product.title}</h3>
-                  <p>Price: ₹{item.product.finalPrice}</p>
-                  <p>Subtotal: ₹{item.product.finalPrice * item.quantity}</p>
-                  <button
-                    onClick={() =>
-                      updateQty(item.product._id, item.quantity + 1)
-                    }
-                  >
-                    +
-                  </button>
-                  <p>Quantity: {item.quantity}</p>
-                  <button
-                    onClick={() =>
-                      updateQty(item.product._id, item.quantity - 1)
-                    }
-                  >
-                    -
-                  </button>
-                  <br />
-                  <button onClick={() => Remove(item.product._id)}>
-                    remove
-                  </button>
-                </div>
-              </div>
-            ))}
+              <span>{item.quantity}</span>
 
-            {/* TOTAL SECTION */}
-            <div
-              style={{
-                borderTop: "2px solid #000",
-                paddingTop: "20px",
-                textAlign: "right",
-              }}
-            >
-              <p>Subtotal: ₹{totalPrice}</p>
-              <p>Shipping: ₹{shipping}</p>
-              <hr />
-              <h2>Grand Total: ₹{grandTotal}</h2>
+              <button
+                onClick={() =>
+                  updateQty(item.product._id, item.quantity + 1)
+                }
+              >
+                +
+              </button>
             </div>
-          </>
-        )}
+
+            <button
+              className="remove-btn"
+              onClick={() => Remove(item.product._id)}
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      ))}
+
+      <div className="cart-summary">
+        <p>Subtotal: ₹{totalPrice}</p>
+        <p>Shipping: ₹{shipping}</p>
+        <hr />
+        <h2>Grand Total: ₹{grandTotal}</h2>
+
+        <button className="checkout-btn">
+          Proceed to Checkout
+        </button>
       </div>
     </>
-  );
-};
+  )}
+</div>
+    </>
+  )
+}
 export default Cart;

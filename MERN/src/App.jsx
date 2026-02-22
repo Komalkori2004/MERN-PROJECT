@@ -8,13 +8,13 @@ import ProductDetails from "./products/ProductDetails";
 import Products from "./products/products";
 import AddProduct from "./products/addProduct";
 import Cart from "./products/cart";
-import Nav from "./pages/nav";
+import Navbar from "./pages/nav";
 
 
 function App() {
   return (
     <>
-     <Nav></Nav>
+     <Navbar></Navbar>
    
      
         <Routes>
