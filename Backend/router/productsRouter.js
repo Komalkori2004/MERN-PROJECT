@@ -23,7 +23,7 @@ router.post("/", protect, isAdmin, upload.single("thumbnail"), async (req, res) 
         title: req.body.title,
         description: req.body.description,
         brand: req.body.brand,
-        category: req.body.category,
+     category: req.body.category,
         price: req.body.price,
         discountPercentage: req.body.discountPercentage,
         countInStock: req.body.countInStock,
@@ -37,21 +37,28 @@ router.post("/", protect, isAdmin, upload.single("thumbnail"), async (req, res) 
 // =======to Get products========
 
 router.get("/", async (req, res) => {
-    try {
-        const keyword = req.query.keyword
-        const query = keyword ? {
-            $or: [
-                { title: { $regex: keyword, $options: "i" } },
-                { description: { $regex: keyword, $options: "i" } },
-                { brand: { $regex: keyword, $options: "i" } },
-            ],
-        } : {}
-        const product = await Product.find(query)
-        res.json(product)
+  try {
+    const { keyword, category } = req.query;
+    const filter = {};
 
-    } catch (error) {
-        res.status(500).json({ message: "Server Error" });
+    if (keyword) {
+      filter.$or = [
+        { title: { $regex: keyword, $options: "i" } },
+        { description: { $regex: keyword, $options: "i" } },
+        { brand: { $regex: keyword, $options: "i" } },
+      ];
     }
+
+    if (category) {
+      filter.category = category;
+    }
+
+    const products = await Products.find(filter).populate("category");
+
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: "Server Error" });
+  }
 });
 
 router.get("/:slug", async (req, res) => {

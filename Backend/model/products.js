@@ -11,7 +11,11 @@ const ProductSchema = new mongoose.Schema(
 
     brand: { type: String, required: true },
 
-    category: { type: String, required: true },
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
+    },
 
     thumbnail: { type: String, required: true },
 
@@ -22,7 +26,7 @@ const ProductSchema = new mongoose.Schema(
     finalPrice: Number,
 
     countInStock: { type: Number, required: true },
-       rating: { type: Number, default: 0 },
+    rating: { type: Number, default: 0 },
 
     numReviews: { type: Number, default: 0 },
 
@@ -31,7 +35,7 @@ const ProductSchema = new mongoose.Schema(
       ref: "User",
     },
   },
-  
+
   { timestamps: true }
 );
 

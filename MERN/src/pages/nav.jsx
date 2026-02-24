@@ -6,7 +6,17 @@ import "../style/nav.css";
 const Navbar = () => {
   const [dropdown, setDropdown] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleDark = () => {
     setDarkMode(!darkMode);
@@ -19,28 +29,26 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <div className="logo">
         <Link to="/">ShopSphere</Link>
       </div>
 
       <div className="nav-links">
         <Link to="/" className="nav-item">Home</Link>
-        {/* <Link to="/products" className="nav-item">Products</Link> */}
+        <Link to="/products" className="nav-item">Shop</Link>
+        <Link to="/about" className="nav-item">About</Link>
       </div>
 
       <div className="nav-right">
-        {/* Dark Mode Toggle */}
         <button className="icon-btn" onClick={toggleDark}>
           {darkMode ? <FaSun /> : <FaMoon />}
         </button>
 
-        {/* Cart */}
         <Link to="/cart" className="icon-btn">
           <FaShoppingCart />
         </Link>
 
-        {/* User Dropdown */}
         <div className="user-menu">
           <FaUserCircle
             className="icon-btn"
@@ -59,4 +67,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar
+export default Navbar;

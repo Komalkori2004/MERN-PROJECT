@@ -1,86 +1,219 @@
+/* =========================
+   PAGE WRAPPER
+========================= */
 .products-page {
-  padding: 20px;
+  background: #f8f9fb;
+  padding: 40px 0 120px;
 }
 
-.hero {
-  text-align: center;
-  padding: 40px 20px;
-}
-
-.hero h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
-}
-
-.hero p {
-  color: gray;
-}
-
+/* =========================
+   SEARCH SECTION
+========================= */
 .search-container {
-  text-align: center;
-  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin: 80px 0 40px;
 }
 
 .search-container input {
-  padding: 12px;
-  width: 300px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  width: 500px;
+  padding: 18px 30px;
+  border-radius: 50px;
+  border: none;
+  background: #ffffff;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  outline: none;
+  font-size: 16px;
 }
 
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
-  gap: 20px;
-}
-
-.product-card {
-  border: 1px solid #eee;
-  padding: 15px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+/* Filter Button */
+.filter-btn {
+  padding: 12px 25px;
+  border-radius: 30px;
+  border: none;
+  background: #111;
+  color: gold;
+  font-weight: 600;
+  cursor: pointer;
   transition: 0.3s ease;
 }
 
-.product-card:hover {
-  transform: translateY(-5px);
+.filter-btn:hover {
+  background: gold;
+  color: #111;
 }
 
+/* =========================
+   SECTION TITLE
+========================= */
+.section-title {
+  text-align: center;
+  font-size: 42px;
+  margin: 80px 0 50px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+/* =========================
+   PRODUCTS GRID
+========================= */
+.products-grid {
+  max-width: 1300px;
+  margin: auto;
+  padding: 0 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 50px;
+}
+
+/* =========================
+   PRODUCT CARD
+========================= */
+.product-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+}
+
+/* Product Image */
 .product-card img {
   width: 100%;
-  height: 220px;
+  height: 280px;
   object-fit: contain;
-  padding: 10px;
-  background: white;
+  background: #f4f4f4;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+/* Product Title */
+.product-card h3 {
+  margin-top: 20px;
 }
 
 .product-card h3 a {
   text-decoration: none;
-  color: black;
+  color: #111;
+  font-size: 20px;
+  font-weight: 700;
+  transition: 0.3s;
 }
 
+.product-card h3 a:hover {
+  color: gold;
+}
+
+/* Price */
 .price {
-  font-weight: bold;
-  margin: 10px 0;
-  font-size: 18px;
+  color: #0f9d58;
+  font-weight: 700;
+  font-size: 20px;
+  margin: 15px 0;
 }
 
+/* =========================
+   BUTTON
+========================= */
 .details-btn {
-  padding: 8px 15px;
-  background: black;
-  color: white;
+  margin-top: 15px;
+  padding: 12px 30px;
   border: none;
-  border-radius: 6px;
+  border-radius: 30px;
+  background: #111;
+  color: #ffffff;
   cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
 }
 
 .details-btn:hover {
-  background: #ff4d4d;
+  background: #0f9d58;
 }
 
-.loading,
-.empty {
-  text-align: center;
-  margin-top: 30px;
+/* =========================
+   FILTER DRAWER
+========================= */
+.filter-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1000;
+}
+
+.filter-drawer {
+  width: 300px;
+  background: #111;
+  color: #ffffff;
+  padding: 30px;
+  animation: slideIn 0.3s ease;
+}
+
+.filter-drawer h3 {
+  margin-bottom: 25px;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.filter-drawer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.filter-drawer li {
+  padding: 12px 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filter-drawer li:hover,
+.filter-drawer li.active {
+  color: gold;
+  font-weight: 600;
+}
+
+/* Close Button */
+.close-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+  float: right;
+}
+
+/* Slide Animation */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* =========================
+   ANIMATION
+========================= */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

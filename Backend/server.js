@@ -7,6 +7,7 @@ require("dotenv").config();
 const UserRouter = require("./router/userRouter");
 const productRoutes=require("./router/productsRouter")
 const CartRouter=require("./router/cartRouter")
+const CategoryRouter=require("./router/categotyRoute.js")
 
 // Middleware
 const app = express();
@@ -22,8 +23,10 @@ mongoose.connect(process.env.MONGO_URL)
 app.use("/api/auth", UserRouter);
 app.use("/uploads", express.static("uploads"));
 
+
 app.use("/api/products", productRoutes);
 app.use("/api/cart", CartRouter);
+app.use("/api/categories",CategoryRouter);
 
 
 // Default Route (optional but good)

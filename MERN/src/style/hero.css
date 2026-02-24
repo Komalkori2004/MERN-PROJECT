@@ -1,0 +1,118 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  background: url("/image/hero.jpg") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 20px;
+}
+
+/* Dark Overlay */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+/* Glass Box */
+.hero-content {
+    font-size: clamp(28px, 6vw, 72px);
+  position: relative;
+  z-index: 2;
+  padding: 60px 80px;
+  border-radius: 20px;
+  max-width: 900px;
+
+  background: rgba(255, 255, 255, 0.08);
+  /* backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px); */
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* Heading */
+.hero-content h1 {
+  font-size: 72px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Paragraph */
+.hero-content p {
+  font-size: 22px;
+  margin-bottom: 40px;
+  opacity: 0.9;
+}
+
+/* Button */
+.hero-btn {
+  padding: 16px 50px;
+  border-radius: 50px;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #0f9d58, #18c77a);
+  color: white;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.hero-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(24, 199, 122, 0.5);
+}
+
+/* ========================= */
+/* 📱 Tablet Responsive */
+/* ========================= */
+
+@media (max-width: 1024px) {
+  .hero-content {
+    padding: 40px 50px;
+  }
+
+  .hero-content h1 {
+    font-size: 48px;
+  }
+
+  .hero-content p {
+    font-size: 18px;
+  }
+}
+
+/* ========================= */
+/* 📱 Mobile Responsive */
+/* ========================= */
+
+@media (max-width: 600px) {
+  .hero {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .hero-content {
+    padding: 30px 20px;
+    width: 100%;
+  }
+
+  .hero-content h1 {
+    font-size: 32px;
+    letter-spacing: 2px;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+  }
+
+  .hero-btn {
+    padding: 12px 30px;
+    font-size: 16px;
+  }
+}

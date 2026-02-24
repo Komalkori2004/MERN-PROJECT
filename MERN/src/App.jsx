@@ -1,4 +1,4 @@
-import {  Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from "./component/login";
 import Signup from "./component/signup";
 import UserDashboard from "./component/userD";
@@ -8,45 +8,22 @@ import ProductDetails from "./products/ProductDetails";
 import Products from "./products/products";
 import AddProduct from "./products/addProduct";
 import Cart from "./products/cart";
-import Navbar from "./pages/nav";
-
+import Layout from "./pages/layout";
+import Home from "./pages/home";
+// import Navbar from "./pages/nav";
 
 function App() {
   return (
     <>
-     <Navbar></Navbar>
-   
-     
-        <Routes>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/" element={<Products />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route
-            path="/user"
-            element={
-              <Protected role="user">
-                <UserDashboard />
-              </Protected>
-            }
-          ></Route>
+      <Routes>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/signup" element={<Signup />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
 
-          {/* <Route
-path="/admin"element={
-  <Protected role="admin">
-    <AdminDashboard/>
-  </Protected>}>
-  </Route> */}
+          <Route path="/products/:slug" element={<ProductDetails />} />
 
-          <Route
-            path="/add-product"
-            element={
-              <Protected role="admin">
-                <AddProduct />
-              </Protected>
-            }
-          ></Route>
-
-          <Route path="/products/:slug" element={<ProductDetails />}></Route>
           <Route
             path="/cart"
             element={
@@ -55,8 +32,25 @@ path="/admin"element={
               </Protected>
             }
           />
-        </Routes>
- 
+
+          <Route
+            path="/user"
+            element={
+              <Protected role="user">
+                <UserDashboard />
+              </Protected>
+            }
+          />
+        </Route>
+        <Route
+          path="/add-product"
+          element={
+            <Protected role="admin">
+              <AddProduct />
+            </Protected>
+          }
+        />
+      </Routes>
     </>
   );
 }
