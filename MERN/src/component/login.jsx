@@ -2,8 +2,6 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
-
 const Login = () => {
   const [form, setform] = useState({
     email: "",
@@ -19,7 +17,8 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/auth/login`,
+        `
+${import.meta.env.VITE_API_URL}/api/auth/login`,
         form,
       );
 
@@ -27,9 +26,9 @@ const Login = () => {
       localStorage.setItem("role", res.data.user.role);
 
       if (res.data.user.role === "admin") {
-        navigate("/add-products");
+        navigate("/admin-page");
       } else {
-        navigate("/products");
+        navigate("/dashboard");
       }
     } catch (error) {
       if (error.response?.status === 404) {

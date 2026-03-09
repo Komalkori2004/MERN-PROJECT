@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./component/login";
 import Signup from "./component/signup";
 import UserDashboard from "./component/userD";
-// import AdminDashboard from "./component/Admin";
+import AdminDashboard from "./component/Admin";
 import Protected from "./component/proctectRouter";
 import ProductDetails from "./products/ProductDetails";
 import Products from "./products/products";
@@ -34,7 +34,7 @@ function App() {
           />
 
           <Route
-            path="/user"
+            path="/dashboard"
             element={
               <Protected role="user">
                 <UserDashboard />
@@ -42,6 +42,14 @@ function App() {
             }
           />
         </Route>
+         <Route
+          path="/add-page"
+          element={
+            <Protected role="admin">
+              <AdminDashboard />
+            </Protected>
+          }
+        />
         <Route
           path="/add-product"
           element={
