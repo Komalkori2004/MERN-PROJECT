@@ -1,89 +1,113 @@
-.hero{
-position:relative;
-min-height:100vh;
+.hero {
+  position: relative;
+  min-height: 100vh;
 
-background:url("/image/hero.jpg")
-center/cover no-repeat;
+  background: url("/image/hero.jpg") center/cover no-repeat;
 
-display:flex;
-align-items:center;
-justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* dark overlay */
 
-.hero::before{
-content:"";
-position:absolute;
-inset:0;
-background:rgba(0,0,0,0.75);
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
 }
 
 /* hero content */
 
-.hero-content{
-position:relative;
-z-index:2;
+.hero-content {
+  position: relative;
+  z-index: 2;
 
-padding:60px 70px;
+  padding: 60px 70px;
 
-background:rgba(20,20,20,0.6);
-backdrop-filter:blur(5px);
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(5px);
 
-border-radius:16px;
+  border-radius: 16px;
 
-border:1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 
-box-shadow:0 20px 50px rgba(0,0,0,0.6);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
 /* small tag */
 
-.hero-tag{
-letter-spacing:3px;
-font-size:14px;
-color:#cfcfcf;
+.hero-tag {
+  letter-spacing: 3px;
+  font-size: 14px;
+  color: #cfcfcf;
 }
 
 /* title */
 
-.hero-title{
-font-size:clamp(40px,6vw,70px);
-font-weight:900;
-letter-spacing:3px;
-color:white;
-margin:15px 0;
+.hero-title {
+  font-size: clamp(40px, 6vw, 70px);
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: white;
+  margin: 15px 0;
 }
 
 /* text */
 
-.hero-text{
-font-size:18px;
-color:#d1d1d1;
-margin-bottom:35px;
+.hero-text {
+  font-size: 18px;
+  color: #d1d1d1;
+  margin-bottom: 35px;
 }
 
 /* button */
 
-.hero-btn{
-padding:14px 45px;
+.hero-btn {
+  padding: 14px 45px;
 
-border-radius:40px;
+  border-radius: 40px;
 
-border:1px solid white;
+  border: 1px solid white;
 
-background:transparent;
+  background: transparent;
+  display: inline-block;
+  margin-top: 10px;
+  color: white;
 
-color:white;
+  font-weight: 600;
 
-font-weight:600;
+  text-decoration: none;
 
-text-decoration:none;
-
-transition:0.4s;
+  transition: 0.4s;
 }
 
-.hero-btn:hover{
-background:white;
-color:black;
+.hero-btn:hover {
+  background: white;
+  color: black;
+}
+
+/* mobile responsive */
+
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 30px 20px;
+    width: 90%;
+    margin: auto;
+  }
+
+  .hero-title {
+    font-size: 34px;
+    letter-spacing: 1px;
+  }
+
+  .hero-text {
+    font-size: 15px;
+  }
+
+  .hero-btn {
+    padding: 12px 28px;
+    font-size: 14px;
+  }
 }

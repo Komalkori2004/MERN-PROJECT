@@ -1,71 +1,93 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-
-import { FaShoppingCart, FaUserCircle, FaMoon, FaSun } from "react-icons/fa";
-import "../style/nav.css";
+import { useState } from "react";
+import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
-  const [dropdown, setDropdown] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+  const [dropdown,setDropdown] = useState(false)
+  const navigate = useNavigate()
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const logout = ()=>{
+    localStorage.removeItem("token")
+    navigate("/login")
+  }
 
-  const toggleDark = () => {
-    setDarkMode(!darkMode);
-    document.body.classList.toggle("dark-mode");
-  };
+  return(
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
+<nav className="navbar navbar-expand-lg custom-navbar">
 
-  return (
-    <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
-      <div className="logo">
-        <Link to="/">ShopSphere</Link>
-      </div>
+<div className="container">
 
-      <div className="nav-links">
-        <Link to="/" className="nav-item">Home</Link>
-        <Link to="/products" className="nav-item">Shop</Link>
-        <Link to="/about" className="nav-item">About</Link>
-      </div>
+<Link className="navbar-brand logo" to="/">
+ShopSphere
+</Link>
 
-      <div className="nav-right">
-        <button className="icon-btn" onClick={toggleDark}>
-          {darkMode ? <FaSun /> : <FaMoon />}
-        </button>
+<button
+className="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navMenu"
+>
+<span className="navbar-toggler-icon"></span>
+</button>
 
-        <Link to="/cart" className="icon-btn">
-          <FaShoppingCart />
-        </Link>
+<div className="collapse navbar-collapse" id="navMenu">
 
-        <div className="user-menu">
-          <FaUserCircle
-            className="icon-btn"
-            onClick={() => setDropdown(!dropdown)}
-          />
+<ul className="navbar-nav mx-auto">
 
-          {dropdown && (
-            <div className="dropdown">
-              <Link to="/profile">Profile</Link>
-              <button onClick={logout}>Logout</button>
-            </div>
-          )}
-        </div>
-      </div>
-    </nav>
-  );
-};
+<li className="nav-item">
+<Link className="nav-link" to="/">Home</Link>
+</li>
 
-export default Navbar;
+<li className="nav-item">
+<Link className="nav-link" to="/products">Shop</Link>
+</li>
+
+<li className="nav-item">
+<Link className="nav-link" to="/about">About</Link>
+</li>
+
+</ul>
+
+<div className="nav-icons">
+
+<Link to="/cart" className="cart-icon">
+<FaShoppingCart />
+</Link>
+
+<div className="profile-menu">
+
+<FaUserCircle
+className="profile-icon"
+onClick={()=>setDropdown(!dropdown)}
+/>
+
+{dropdown && (
+
+<div className="profile-dropdown">
+
+<Link to="/profile">Profile</Link>
+
+<button onClick={logout}>
+Logout
+</button>
+
+</div>
+
+)}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+)
+
+}
+
+export default Navbar
