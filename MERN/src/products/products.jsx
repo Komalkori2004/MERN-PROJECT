@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "../style/product.css";
-;
 import Sidebar from "../pages/sidebar";
+import ProductCard from "./productcard";
 
 
 const Products = () => {
@@ -68,16 +68,7 @@ const Products = () => {
       ) : (
         <div className="products-grid">
           {products.map((p) => (
-            <div key={p._id} className="product-card fade-up">
-              <img
-                src={`${import.meta.env.VITE_API_URL}/${p.thumbnail}`}
-                alt={p.title}
-              />
-              <h3>
-                <Link to={`/products/${p.slug}`}>{p.title}</Link>
-              </h3>
-              <p className="price">₹{p.finalPrice}</p>
-            </div>
+             <ProductCard key={p._id} product={p} />
           ))}
         </div>
       )}

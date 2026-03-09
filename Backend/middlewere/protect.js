@@ -3,10 +3,7 @@ const User = require("../model/user");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const protect = async (req, res, next) => {
-  // console.log("==== DEBUG START ====");
-  // console.log("Headers:", req.headers);
-  // console.log("Authorization Header:", req.headers.authorization);
-  // console.log("==== DEBUG END ====");
+
   const token = req.headers.authorization?.split(" ")[1];
 
   if (!token) {

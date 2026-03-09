@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 import { FaShoppingCart, FaUserCircle, FaMoon, FaSun } from "react-icons/fa";
 import "../style/nav.css";
 
